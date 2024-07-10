@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { View, Image , Text, StyleSheet} from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { View, Image , Text, StyleSheet, Button} from "react-native";
+import { NavigationContainer, CommonActions } from "@react-navigation/native";
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import ProductGallery from "./screens/Gallery";
@@ -25,9 +25,59 @@ async function loadFonts() {
 
 function StackScreens() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Product Gallery">
+    <Stack.Navigator  initialRouteName="ProductGallery"
+      screenOptions={({ navigation }) => ({
+      headerShown: true,
+      headerTitle: () => (
+        <Image
+          source={require("./assets/Logo.png")}
+          style={{ width: 110, height: "100%" }}
+          resizeMode="contain"
+          resizeMethod="scale"
+        />
+      ),
+      headerTitleAlign: "center",
+      headerRight: () => (
+        <View style={{ flexDirection: "row", paddingRight: 15 }}>
+          <Ionicons
+            name="search-outline"
+            size={24}
+            color="black"
+            style={{ marginRight: 15 }}
+            onPress={() => console.log("Search")}
+          />
+          <Ionicons
+            name="bag-outline"
+            size={24}
+            color="black"
+            onPress={() => navigation.navigate("Cart")}
+          />
+        </View>
+      ),
+      headerLeft: () => {
+        return (
+          <TouchableWithoutFeedback
+            onPress={() => navigation.toggleDrawer()}
+          >
+            <Image source={require("./assets/Menu.png")} color="black" />
+          </TouchableWithoutFeedback>
+        );
+      },
+      headerLeftContainerStyle: { paddingLeft: 15 },
+    })}>
       <Stack.Screen name="ProductGallery" component={ProductGallery} />
-      <Stack.Screen name="ProductDetail" component={ProductDetails} />
+      <Stack.Screen name="ProductDetail" component={ProductDetails} 
+      options={({ navigation }) => ({
+        title: 'Product Detail',
+        headerLeft: () => (
+          <Ionicons
+                  name="arrow-back"
+                  size={24}
+                  color="black"
+                  onPress={() => navigation.goBack()}
+                />
+        ),
+      })}/>
     </Stack.Navigator>
   );
 
@@ -73,13 +123,6 @@ export default function App() {
           drawerContent={(props) => <CustomDrawerContent {...props}/>}
           screenOptions={({ navigation }) => ({
             headerShown: true,
-            drawerIcon: ({ focused, size }) => (
-              <Ionicons
-                name="menu"
-                size={size}
-                color={focused ? "#7cc" : "#ccc"}
-              />
-            ),
             headerTitle: () => (
               <Image
                 source={require("./assets/Logo.png")}
@@ -118,12 +161,15 @@ export default function App() {
             headerLeftContainerStyle: { paddingLeft: 15 },
           })}
         >
-          <Drawer.Screen name="Store" component={StackScreens} />
-          <Drawer.Screen name="Locations" component={StackScreens} />
-          <Drawer.Screen name="Blog" component={StackScreens} />
-          <Drawer.Screen name="Jewelery" component={StackScreens} />
-          <Drawer.Screen name="Electronic" component={StackScreens} />
-          <Drawer.Screen name="Clothing" component={StackScreens} />
+          <Drawer.Screen name="Store" component={StackScreens} 
+          options={({ navigation }) => ({
+            headerShown: false, 
+          })}/>
+          <Drawer.Screen name="Locations" component={Cart} />
+          <Drawer.Screen name="Blog" component={Cart} />
+          <Drawer.Screen name="Jewelery" component={Cart} />
+          <Drawer.Screen name="Electronic" component={Cart} />
+          <Drawer.Screen name="Clothing" component={Cart} />
           <Drawer.Screen
             name="Cart"
             component={Cart}
@@ -151,13 +197,18 @@ export default function App() {
 
 const styles = StyleSheet.create({
   drawerHeader: {
-    height: 100,
-    alignItems: 'center',
+    height: 70,
+    alignItems: 'flex-start',
     justifyContent: 'center',
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    
   },
   drawerHeaderText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontFamily: "TenorSans",
+    paddingBottom: 3,
+    borderBottomWidth: 1,
+    borderBottomColor: 'orange',
   },
 });
