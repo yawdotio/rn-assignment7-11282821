@@ -1,9 +1,7 @@
 # rn-assignment7-11282821
 ReactNative assignment on e-storefront
 
-# rn-assignment7-11282821
-
-# Fashion E-commerce App
+# E-commerce App
 
 A React Native application designed for a seamless shopping experience, featuring a curated selection of fashion items. This app offers an intuitive user interface that allows users to browse, select, and purchase their favorite clothing items with ease. From the latest trends in women's fashion to essential accessories, find everything you need with just a few taps.
 
