@@ -1,7 +1,7 @@
-# rn-assignment6-11282821
+# rn-assignment7-11282821
 ReactNative assignment on e-storefront
 
-# rn-assignment6-11282821
+# rn-assignment7-11282821
 
 # Fashion E-commerce App
 
@@ -19,8 +19,8 @@ To run this project, you'll need to have Node.js installed on your computer. Aft
 
 To install the application, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/yawadubempong/rn-assignment6-11282821.git`
-2. Navigate to the project directory: `cd rn-assignment6-11282821/boutique`
+1. Clone the repository: `git clone https://github.com/yawadubempong/rn-assignment7-11282821.git`
+2. Navigate to the project directory: `cd rn-assignment7-11282821/boutique`
 3. Install the dependencies: `npm install`
 
 ## Running the Application
@@ -58,4 +58,41 @@ The project uses the `AsyncStorage` library to store the cart that will allow th
 
 | Gallery View | Cart View |
 |--------------|-----------|
-| ![Product Gallery View](Screenshot_20240703-185448.jpg) | ![Cart View](Screenshot_20240703-185457.jpg) |
+| ![Product Gallery View](<WhatsApp Image 2024-07-10 at 08.59.11_ac1e2311.jpg>)| ![Cart View](<WhatsApp Image 2024-07-10 at 08.59.12_a88afd98.jpg>)|
+
+## Product Detail Screen
+This section introduces a Product Detail Screen to provide more information about each product, including descriptions, pricing, and additional images. This screen is accessible by tapping on a product in the Product Gallery.
+
+### Screenshots
+
+#### Product Detail
+
+| Detail View |
+|-------------|
+| ![Product Detail View](<WhatsApp Image 2024-07-10 at 08.59.12_76b0cb3e.jpg>)|
+
+## Updated Drawer Navigation
+The application's navigation has been updated to include a drawer for easier access to different sections of the app. This drawer includes links to the Product Gallery, Product Detail Screen, and Cart, providing a seamless navigation experience.
+
+### Screenshots
+
+#### Updated Drawer View
+
+| Drawer View |
+|-------------|
+| ![Drawer View](<WhatsApp Image 2024-07-10 at 08.59.11_3a63f42f.jpg>) |
+
+## API Calls
+The application integrates with the FakeStore API to fetch product data, including names, descriptions, and prices. This integration allows for a dynamic and scalable product listing.
+
+### Endpoints Used
+- **Get Products**: `GET /products` - Retrieves the list of products.
+- **Get Product Detail**: `GET /products/{id}` - Retrieves details of a specific product.
+
+### Example
+Fetching product details:
+
+```javascript
+fetch('https://fakestoreapi.com/products/1')
+    .then(res=>res.json())
+    .then(json=>console.log(json))
